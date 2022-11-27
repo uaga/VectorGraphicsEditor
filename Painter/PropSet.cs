@@ -23,7 +23,11 @@ namespace Painter
             painter.SetPenColor = Color;
             painter.Width = Width;
         }
-        
+
+        public LineProps Copy()
+        {
+            return new LineProps(Color, Width);
+        }
     }
     public class FillProps : Propertie, IFillProperties
     {
@@ -36,6 +40,10 @@ namespace Painter
         public override void Apply(DrawSystem painter)
         {
             painter.SetFillColor = Color;
+        }
+        public FillProps Copy()
+        {
+            return new FillProps(Color);
         }
     }
     public class PropSet : List<Propertie>

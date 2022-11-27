@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Painter
 {
@@ -30,14 +26,18 @@ namespace Painter
             switch (itemType)
             {
                 case ItemType.Line:
-                    frame = new Frame(x, y, x + 50, y + 50); // ИЗМЕНИТЬ
+                    frame = new Frame(x, y, x + 150, y + 150); // ИЗМЕНИТЬ
                     properties = new PropSet();
-                    properties.Add(lineProps);
-                    //properties.Apply();
+                    properties.Add(lineProps.Copy());
                     items.Add(new Line(frame, properties));
 
                     break;
                 case ItemType.Rect:
+                    frame = new Frame(x, y, x + 150, y + 150);
+                    properties = new PropSet();
+                    properties.Add(lineProps.Copy());
+                    properties.Add(fillProps.Copy());
+                    items.Add(new Rect(frame, properties));
                     break;
                 default:
                     break;
@@ -48,7 +48,8 @@ namespace Painter
             this.lineProps.Width = lineProps.Width;
             this.lineProps.Color = lineProps.Color;
 
-            this.fillProps.Color = fillProps.Color;
+
+            this.fillProps.Color = (fillProps == null ? Color.Empty : fillProps.Color);
         }
     }
     internal enum ItemType

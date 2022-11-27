@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace Painter
 {
@@ -26,9 +21,9 @@ namespace Painter
             ItemProperties = new GraphicsProperties(factory);
 
             // Временное решение
-            ItemProperties.lineProperties = new LineProps(Color.Black, 1);
-            ItemProperties.fillProperties = new FillProps(Color.Empty);
-            ItemProperties.ApplyProperties();
+            //ItemProperties.lineProperties = new LineProps(Color.Black, 1);
+            //ItemProperties.fillProperties = new FillProps(Color.Empty);
+            //ItemProperties.ApplyProperties();
 
             scene = new Scene(new DrawSystem(graphics), store);
         }

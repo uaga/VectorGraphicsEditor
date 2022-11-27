@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -49,11 +48,21 @@ namespace Painter
             #region Second Generetion
 
             model.ItemType = ItemType.Line;
-            model.Create(150, 50);
-            model.ItemProperties.lineProperties = new LineProps(Color.Red, 5);
-            ((GraphicsProperties)model.ItemProperties).ApplyProperties();
-            model.Create(155, 50);
 
+            model.ItemProperties.lineProperties = new LineProps(Color.Green, 5);
+            model.ItemProperties.ApplyProperties();
+            model.Create(200, 50);
+
+            model.ItemProperties.lineProperties = new LineProps(Color.Red, 5);
+            model.ItemProperties.ApplyProperties();
+            model.Create(210, 50);
+
+
+            model.ItemType = ItemType.Rect;
+            model.ItemProperties.lineProperties = new LineProps(Color.Blue, 2);
+            model.ItemProperties.fillProperties = new FillProps(Color.HotPink);
+            model.ItemProperties.ApplyProperties();
+            model.Create(275, 220);
 
             #endregion
         }
