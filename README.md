@@ -1,1 +1,1 @@
-# Painter
+# Vector graphics editor
