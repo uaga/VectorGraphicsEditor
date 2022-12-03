@@ -7,18 +7,24 @@ namespace Painter
     public partial class Form1 : Form
     {
         Graphics graphics;
-        Model model;
+        IModel model;
+        IController controller;
         public Form1()
         {
             InitializeComponent();
             graphics = panel1.CreateGraphics();
             model = new Model(graphics);
+            controller = new Controller(model);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            model.ItemType = ItemType.Line;
-            model.Create(50, 50);
+            #region Second Generetion
+            //model.CreatingItemType = ItemType.Line;
+            //model.Create(50, 50);
+            #endregion
+
+            controller.SetTypeCreatingItem(ItemType.Line);
         }
 
         private void GetColor(object sender, EventArgs e)
@@ -47,7 +53,7 @@ namespace Painter
             #endregion
             #region Second Generetion
 
-            model.ItemType = ItemType.Line;
+            model.CreatingItemType = ItemType.Line;
 
             model.ItemProperties.lineProperties = new LineProps(Color.Green, 5);
             model.ItemProperties.ApplyProperties();
@@ -58,13 +64,15 @@ namespace Painter
             model.Create(210, 50);
 
 
-            model.ItemType = ItemType.Rect;
+            model.CreatingItemType = ItemType.Rect;
             model.ItemProperties.lineProperties = new LineProps(Color.Blue, 2);
             model.ItemProperties.fillProperties = new FillProps(Color.HotPink);
             model.ItemProperties.ApplyProperties();
             model.Create(275, 220);
 
             #endregion
+
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -109,6 +117,12 @@ namespace Painter
         private void button5_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void panel1_Click(object sender, EventArgs e)
+        {
+            MouseEventArgs mouse = (MouseEventArgs)e;
+            controller.eventHandler.LeftMouseUp(mouse.X, mouse.Y);
         }
     }
 }
