@@ -117,37 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="button4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAkJJREFUSEvt
-        1l9oTnEcx/EzhhSTS/+GxY1/c+PfFZoobaJwZSkm5Waj1ZIbl1woigspbrZIEbl1sZhduFAuhkulMORO
-        kdm837+z3zwdz/N0ZmeS9qlXO7+ndb7P73d+v+95kqn8D1mMtZgRRn8hM9GDkVGvsQmTklpsxhJ04T02
-        YD5uwOJ+oULjDZ9gGN/xGWcQY3Fnvi6MCswefEE9DuIb9iHGmVt4URgVmG0YghvJ+AVc+o1hlCRX0Z1e
-        5st0zEovq6YOn+BzXeUHZCGc+Wl4j2nIlSZ4M5/ZZTiDcpkLn+8r3Edp8QNwJZaFUY44g3e4hJ0YxG1k
-        i1u0DxZdAM/rHVh8DZbCDZf7KHXC2Xpj400sfi2M0mSLGne3y3oLztQN5/9UWq3f8hxn08uxuGw+sxqU
-        K+rfFzgVRkmyFS3IfXY9cz8Qd2TMRTyFy/kI2aIv4bOOqzTurIdnznO4o8QbnEArPqJcUffGH2cLYo/N
-        2o8OuKQej8KKmgZYJNtl+nEOnk9nPDD69zEmXNS4K92Nu8PoVw7Dz1fD4u04hEJfefdwPb0cyzG4EhY/
-        j2bY2Uwj/Cz3sakUj8FX2ABMGzyXR7EXD2Bj8MgYH0+lJjPu+Owe4jgsegSl8Uzb1WJik7kSRhPIcrh5
-        XF6XOZtsYbML9vY8L5aq8ReFxXuxwg9Kki08G/b2D8j9JqoWZ26nciY34Yt+JSzsSthKL8CXyltsR6Fx
-        w92Fuzo2FNlen+Ek5mDSYtN3Fexw/oaah6n8y0mSn+6/ghmO3ayVAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="button5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAF5JREFUSEvt
-        lrENgEAQw34JEPtvQoXQQwMF44DDDjkkFEsu7hq3aeFPjLjj/F5FKHrijaseFQx4oKIXTmgnUSuJWknU
-        SqJWErWSqJVPoqKjohpoGmplLLhhaTQYae0B0Z9BVjgfUBoAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="button6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAHxJREFUSEvt
-        ljEOgDAMA/sv4EcgRsTGyEfhGVBniETViAWXySfdlthjkoT4ixme8CZrmRMMGWC0xPKCPaxYoQ/tZD3X
-        Oio26ANsPNc6KlTMRMUFKmai4gIVM3ktfp7FhaznhmfRjrQPtNAegQ6G2HtywGjxi5Y5QiFak1IGicnB
-        cqzl+RgAAAAASUVORK5CYII=
-</value>
-  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>56</value>
   </metadata>

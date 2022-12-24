@@ -10,39 +10,44 @@ namespace Painter
     interface IModel
     {
         ItemType CreatingItemType { get; set; }
-        IGraphicsProperties ItemProperties { get;}
+        GraphicsProperties ItemProperties { get;}
+        SelectionManeger SelectionManeger { get;}
         //IGraphics Graphics { get;}
         void Create(int x, int y);
         void Repeint();
     }
     internal class Model : IModel
     {
-        ItemFactory factory;
-        Scene scene;
-        
+        readonly ItemFactory factory;
+        readonly Scene scene;
+        public SelectionManeger SelectionManeger { get; }
+        DrawSystem DrawSystem;
         public Model(Graphics graphics)
         {
             ItemStore store = new ItemStore();
-            factory = new ItemFactory(store);
+            SelectionManeger= new SelectionManeger(store);
+            factory = new ItemFactory(store, SelectionManeger);
             ItemProperties = new GraphicsProperties(factory);
-
-            scene = new Scene(new DrawSystem(graphics), store);
+            DrawSystem = new DrawSystem(graphics);
+            scene = new Scene(DrawSystem, store);
         }
 
         public ItemType CreatingItemType { get; set; }
-        public IGraphicsProperties ItemProperties { get;}
+        public GraphicsProperties ItemProperties { get; set; }
         //IGraphics Graphics { get;}
 
         public void Create(int x, int y)
         {
-            factory.itemType = CreatingItemType;
-            factory.CreateItem(x, y);
+            factory.ItemType = CreatingItemType;
+            //factory.CreateItem(x, y);
+            factory.CreateAndGrab(x, y);
             Repeint();
         }
 
         public void Repeint()
         {
             scene.Repaint();
+            SelectionManeger.Repaint(DrawSystem);
         }
     }
 }

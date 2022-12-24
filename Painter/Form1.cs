@@ -27,19 +27,19 @@ namespace Painter
             controller.SetTypeCreatingItem(ItemType.Line);
         }
 
-        private void GetColor(object sender, EventArgs e)
+        private Color GetColor()
         {
-            //using (ColorDialog colorDialog = new ColorDialog())
-            //{
-            //    if (colorDialog.ShowDialog() == DialogResult.OK)
-            //    {
-            //        return colorDialog.Color;
-            //    }
-            //    else
-            //    {
-            //        return Color.Black;
-            //    }
-            //}
+            using (ColorDialog colorDialog = new ColorDialog())
+            {
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    return colorDialog.Color;
+                }
+                else
+                {
+                    return Color.Black;
+                }
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -53,26 +53,26 @@ namespace Painter
             #endregion
             #region Second Generetion
 
-            model.CreatingItemType = ItemType.Line;
+            //model.CreatingItemType = ItemType.Line;
 
-            model.ItemProperties.lineProperties = new LineProps(Color.Green, 5);
-            model.ItemProperties.ApplyProperties();
-            model.Create(200, 50);
+            //model.ItemProperties.lineProperties = new LineProps(Color.Green, 5);
+            //model.ItemProperties.ApplyProperties();
+            //model.Create(200, 50);
 
-            model.ItemProperties.lineProperties = new LineProps(Color.Red, 5);
-            model.ItemProperties.ApplyProperties();
-            model.Create(210, 50);
+            //model.ItemProperties.lineProperties = new LineProps(Color.Red, 5);
+            //model.ItemProperties.ApplyProperties();
+            //model.Create(210, 50);
 
 
-            model.CreatingItemType = ItemType.Rect;
-            model.ItemProperties.lineProperties = new LineProps(Color.Blue, 2);
-            model.ItemProperties.fillProperties = new FillProps(Color.HotPink);
-            model.ItemProperties.ApplyProperties();
-            model.Create(275, 220);
+            //model.CreatingItemType = ItemType.Rect;
+            //model.ItemProperties.lineProperties = new LineProps(Color.Blue, 2);
+            //model.ItemProperties.fillProperties = new FillProps(Color.HotPink);
+            //model.ItemProperties.ApplyProperties();
+            //model.Create(275, 220);
 
             #endregion
 
-
+            controller.SetTypeCreatingItem(ItemType.Rect);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -122,7 +122,35 @@ namespace Painter
         private void panel1_Click(object sender, EventArgs e)
         {
             MouseEventArgs mouse = (MouseEventArgs)e;
-            controller.eventHandler.LeftMouseUp(mouse.X, mouse.Y);
+            controller.EventHandler.LeftMouseDown(mouse.X, mouse.Y);
+        }
+        // Цвет заливки
+        private void button4_Click(object sender, EventArgs e)
+        {
+            controller.Model.ItemProperties.lineProperties.Color = GetColor();
+            controller.Model.ItemProperties.ApplyProperties();
+        }
+        // Цвет линии
+        private void button7_Click(object sender, EventArgs e)
+        {
+            controller.Model.ItemProperties.fillProperties.Color = GetColor();
+            controller.Model.ItemProperties.ApplyProperties();
+        }
+        // + ширина линии
+        private void button9_Click(object sender, EventArgs e)
+        {
+            controller.Model.ItemProperties.lineProperties.Width += 1;
+            controller.Model.ItemProperties.ApplyProperties();
+        }
+        // - ширина линии
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (controller.Model.ItemProperties.lineProperties.Width > 1)
+            {
+                controller.Model.ItemProperties.lineProperties.Width -= 1;
+                controller.Model.ItemProperties.ApplyProperties();
+            }
+
         }
     }
 }

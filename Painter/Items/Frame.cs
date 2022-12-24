@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace Painter
-{    class Frame
+{
+    public class Frame
     {
         public int x1 { set; get; }
         public int y1 { set; get; }
@@ -24,6 +21,10 @@ namespace Painter
             {
                 return new int[] { x1, y1, x2, y2 };
             }
+        }
+        public Rectangle GetRect()
+        {
+            return new Rectangle(x1, y1, x2 - x1, y2 - y1);
         }
     }
 }

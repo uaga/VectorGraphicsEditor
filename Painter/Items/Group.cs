@@ -35,5 +35,15 @@ namespace Painter
 
             return new Frame(10, 10, 10, 10);
         }
+
+        public override bool TryGrab(int x, int y)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Selection CreateSelection()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

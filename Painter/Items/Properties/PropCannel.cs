@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿
+using System.Drawing;
 
 namespace Painter
 {
@@ -20,8 +21,8 @@ namespace Painter
     internal class GraphicsProperties : IGraphicsProperties
     {
         ItemFactory factory;
-        public ILineProperties lineProperties { get; set; }
-        public IFillProperties fillProperties { get; set; }
+        public ILineProperties lineProperties { get; set; } = new LineProps(Color.Black, 1);
+        public IFillProperties fillProperties { get; set; } = new FillProps(Color.Empty);
         public GraphicsProperties(ItemFactory factory)
         {
             this.factory = factory;
