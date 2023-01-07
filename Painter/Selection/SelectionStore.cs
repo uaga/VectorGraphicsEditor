@@ -8,12 +8,11 @@ namespace Painter
 {
     internal class SelectionStore : List<Selection>
     {
+        public Selection ActiveSelection { get; set; }
         public void Release()
         {
-            foreach (Selection selection in this)
-            {
-                selection.ReleaseGrab();
-            }
+            ActiveSelection= null;
+            Clear();
         }
     }
 }

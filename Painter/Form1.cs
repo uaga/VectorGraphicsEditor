@@ -118,12 +118,6 @@ namespace Painter
         {
 
         }
-
-        private void panel1_Click(object sender, EventArgs e)
-        {
-            MouseEventArgs mouse = (MouseEventArgs)e;
-            controller.EventHandler.LeftMouseDown(mouse.X, mouse.Y);
-        }
         // Цвет заливки
         private void button4_Click(object sender, EventArgs e)
         {
@@ -151,6 +145,21 @@ namespace Painter
                 controller.Model.ItemProperties.ApplyProperties();
             }
 
+        }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            controller.EventHandler.LeftMouseDown(e.X, e.Y);
+        }
+
+        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            controller.EventHandler.LeftMouseUp(e.X, e.Y);
+        }
+
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            controller.EventHandler.MouseMove(e.X, e.Y);
         }
     }
 }

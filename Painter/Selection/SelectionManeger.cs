@@ -5,7 +5,7 @@ namespace Painter
     internal class SelectionManeger : ISelection
     {
         ItemStore Items { get; }
-        SelectionStore selections;
+        readonly SelectionStore selections;
         public SelectionManeger(ItemStore items)
         {
             Items = items;
@@ -14,22 +14,32 @@ namespace Painter
 
         public void Release()
         {
-            selections.Release();
+            selections.ActiveSelection = null;
+            //selections.Release();
         }
 
         public void SkipAll()
         {
             //selections.Release();
         }
-
+        public void SkipActiveSelection()
+        {
+            selections.ActiveSelection = null;
+            selections.Clear();
+        }
         public bool TryDrag(int x, int y)
         {
-            return true;
+            if (selections.ActiveSelection == null) { return false; }
+            return selections.ActiveSelection.TryDragTo(x, y);
         }
 
         public bool TryGrab(int x, int y)
         {
-            throw new NotImplementedException();
+            if (TrySelect(x, y))
+            {
+                return selections.ActiveSelection.TryGrab(x, y);
+            }
+            return false;
         }
 
         public bool TryGroup(int x, int y)
@@ -42,7 +52,9 @@ namespace Painter
             Item selectItem = Items.TryGrab(x, y);
             if (selectItem != null)
             {
-                selections.Add(selectItem.CreateSelection());
+                Selection newSelection = selectItem.CreateSelection();
+                selections.Add(newSelection);
+                selections.ActiveSelection = newSelection;
                 return true;
             }
             return false;

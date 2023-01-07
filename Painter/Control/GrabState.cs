@@ -15,19 +15,28 @@
 
         public override void LeftMouseDown(int x, int y)
         {
-            EventHandler.Model.SelectionManeger.TrySelect(x, y);
+            if (EventHandler.Model.SelectionManeger.TryGrab(x, y))
+            {
+                return;
+            }
+            else
+            {
+                //EventHandler.Model.SelectionManeger.SkipActiveSelection();
+            }
             EventHandler.Model.Repeint();
         }
 
         public override void LeftMouseUp(int x, int y)
         {
-
+            EventHandler.Model.SelectionManeger.Release();
+            //EventHandler.ActiveState = EventHandler.States[StateType.CreateState];
         }
 
         public override void MouseMove(int x, int y)
         {
-
+            EventHandler.Model.SelectionManeger.TryDrag(x, y);
             Model.Repeint();
         }
+
     }
 }
