@@ -10,8 +10,8 @@ namespace Painter
     interface IModel
     {
         ItemType CreatingItemType { get; set; }
-        GraphicsProperties ItemProperties { get;}
-        SelectionManeger SelectionManeger { get;}
+        GraphicsProperties ItemProperties { get; }
+        SelectionManeger SelectionManeger { get; }
         //IGraphics Graphics { get;}
         void Create(int x, int y);
         void Repeint();
@@ -25,8 +25,9 @@ namespace Painter
         public Model(Graphics graphics)
         {
             ItemStore store = new ItemStore();
-            SelectionManeger= new SelectionManeger(store);
+            SelectionManeger = new SelectionManeger(store);
             factory = new ItemFactory(store, SelectionManeger);
+            SelectionManeger.Factory = factory;
             ItemProperties = new GraphicsProperties(factory);
             DrawSystem = new DrawSystem(graphics);
             scene = new Scene(DrawSystem, store);

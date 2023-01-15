@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Painter
 {
@@ -6,6 +7,7 @@ namespace Painter
     {
         ItemStore Items { get; }
         readonly SelectionStore selections;
+        public ItemFactory Factory { get; set; }
         public SelectionManeger(ItemStore items)
         {
             Items = items;
@@ -14,19 +16,22 @@ namespace Painter
 
         public void Release()
         {
-            selections.ActiveSelection = null;
             //selections.Release();
+            selections.Remove(selections.ActiveSelection);
+            selections.ActiveSelection = null;
         }
 
         public void SkipAll()
         {
-            //selections.Release();
+            selections.SkipAll();
         }
+
         public void SkipActiveSelection()
         {
             selections.ActiveSelection = null;
             selections.Clear();
         }
+
         public bool TryDrag(int x, int y)
         {
             if (selections.ActiveSelection == null) { return false; }
@@ -37,16 +42,33 @@ namespace Painter
         {
             if (TrySelect(x, y))
             {
-                return selections.ActiveSelection.TryGrab(x, y);
+                return selections.ActiveSelection.TryGrab(x, y) > 0;
             }
             return false;
         }
 
-        public bool TryGroup(int x, int y)
+        public bool TryGroup()
         {
-            throw new NotImplementedException();
-        }
+            if (selections.Count > 1)
+            {
+                List<Item> items = new List<Item>();
+                foreach (Selection selection in selections)
+                {
+                    items.Add(selection.GetItem);
+                }
+                selections.Clear();
+                Factory.CreateAndGrab(items);
 
+                
+
+                return true;
+            }
+            return false;
+        }
+        //public bool TryGrabFrame(int x, int y)
+        //{
+
+        //}
         public bool TrySelect(int x, int y)
         {
             Item selectItem = Items.TryGrab(x, y);
@@ -60,10 +82,11 @@ namespace Painter
             return false;
         }
 
-        public bool TryUnGroup(int x, int y)
+        public bool TryUnGroup()
         {
             throw new NotImplementedException();
         }
+
         public void Repaint(DrawSystem drawSystem)
         {
             foreach (Selection selection in selections)

@@ -24,7 +24,6 @@ namespace Painter
         LineProps lineProps { get; set; } = new LineProps(Color.Black, 1);
         FillProps fillProps { get; set; } = new FillProps(Color.Empty);
         SelectionManeger SelectionManeger { get; set; }
-        
         public ItemType ItemType { get; set; } = ItemType.None;
         public ItemFactory(ItemStore store, SelectionManeger selectionManeger)
         {
@@ -39,15 +38,12 @@ namespace Painter
             switch (ItemType)
             {
                 case ItemType.Line:
-                    frame = new Frame(x, y, x + 150, y + 150); // ИЗМЕНИТЬ
+                    frame = new Frame(x, y, x + 150, y + 150);
                     properties = new PropSet
                     {
                         lineProps.Copy()
                     };
                     return new Line(frame, properties);
-
-                    //items.Add(new Line(frame, properties));
-                    //break;
                 case ItemType.Rect:
                     frame = new Frame(x, y, x + 150, y + 150);
                     properties = new PropSet
@@ -56,13 +52,8 @@ namespace Painter
                         fillProps.Copy()
                     };
                     return new Rect(frame, properties);
-
-                    //items.Add(new Rect(frame, properties));
-                    //break;
                 default:
                     return null;
-
-                    //break;
             }
         }
         public void ApplyProperties(ILineProperties lineProps, IFillProperties fillProps)
@@ -73,16 +64,28 @@ namespace Painter
 
             this.fillProps.Color = (fillProps == null ? Color.Empty : fillProps.Color);
         }
-
         public void CreateAndGrab(int x, int y)
         {
             Item item = CreateItem(x, y);
             items.Add(item);
             SelectionManeger.TrySelect(x, y);
         }
+        public void CreateAndGrab(List<Item> items)
+        {
+            Item item = CreateItem(items);
+            items.Add(item);
+            SelectionManeger.TrySelect(items[0].frame.x1, items[0].frame.y1);
+        }
+        public Item CreateItem(List<Item> items)
+        {
+            Item group = new Group(items);
+            this.items.Clear();
+            this.items.Add(group);
+            return group;
+        }
     }
     internal enum ItemType
     {
-        None, Line, Rect
+        None, Line, Rect, 
     }
 }

@@ -6,27 +6,17 @@ namespace Painter
 {
     public partial class Form1 : Form
     {
-        Graphics graphics;
-        IModel model;
-        IController controller;
+        readonly Graphics graphics;
+        readonly IModel model;
+        readonly IController controller;
         public Form1()
         {
             InitializeComponent();
             graphics = panel1.CreateGraphics();
             model = new Model(graphics);
             controller = new Controller(model);
+            controller.EventHandler.ActiveState = controller.EventHandler.States[StateType.EmptyState];
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            #region Second Generetion
-            //model.CreatingItemType = ItemType.Line;
-            //model.Create(50, 50);
-            #endregion
-
-            controller.SetTypeCreatingItem(ItemType.Line);
-        }
-
         private Color GetColor()
         {
             using (ColorDialog colorDialog = new ColorDialog())
@@ -41,125 +31,86 @@ namespace Painter
                 }
             }
         }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
-            #region First Generetion
-            //DrawSystem painter = new DrawSystem(graphics);
-            //PropSet propSet = new PropSet();
-            //propSet.Add(new LineProps(Color.DarkGoldenrod));
-            //Line line = new Line(new Frame(20, 20, 20, 100), propSet);
-            //line.Draw(painter);
-            #endregion
-            #region Second Generetion
-
-            //model.CreatingItemType = ItemType.Line;
-
-            //model.ItemProperties.lineProperties = new LineProps(Color.Green, 5);
-            //model.ItemProperties.ApplyProperties();
-            //model.Create(200, 50);
-
-            //model.ItemProperties.lineProperties = new LineProps(Color.Red, 5);
-            //model.ItemProperties.ApplyProperties();
-            //model.Create(210, 50);
-
-
-            //model.CreatingItemType = ItemType.Rect;
-            //model.ItemProperties.lineProperties = new LineProps(Color.Blue, 2);
-            //model.ItemProperties.fillProperties = new FillProps(Color.HotPink);
-            //model.ItemProperties.ApplyProperties();
-            //model.Create(275, 220);
-
-            #endregion
-
+            if (ModifierKeys == Keys.Control)
+            {
+                controller.EventHandler.CtrlAndMouseDown(e.X, e.Y);
+            }
+            else
+            {
+                controller.EventHandler.LeftMouseDown(e.X, e.Y);
+            }
+        }
+        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            controller.EventHandler.LeftMouseUp(e.X, e.Y);
+        }
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            controller.EventHandler.MouseMove(e.X, e.Y);
+        }
+        private void SetLineType(object sender, EventArgs e)
+        {
+            controller.SetTypeCreatingItem(ItemType.Line);
+            controller.EventHandler.ActiveState = controller.EventHandler.States[StateType.CreateState];
+        }
+        private void SetRectType(object sender, EventArgs e)
+        {
             controller.SetTypeCreatingItem(ItemType.Rect);
+            controller.EventHandler.ActiveState = controller.EventHandler.States[StateType.CreateState];
         }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            #region First generetion (Group)
-            //List<Item> objs = new List<Item>();
-
-            //PropSet propSet = new PropSet();
-            //propSet.Add(new LineProps(Color.Blue));
-            //objs.Add(new Line(new Frame(300, 50, 350, 200), propSet) );
-
-            //PropSet propSet1 = new PropSet();
-            //propSet1.Add(new LineProps(Color.Red));
-            //objs.Add(new Line(new Frame(305, 50, 355, 200), propSet1));
-
-            //PropSet propSet2 = new PropSet();
-            //propSet2.Add(new LineProps(Color.Green));
-            //objs.Add(new Line(new Frame(310, 50, 360, 200), propSet2));
-
-            //PropSet propSet3 = new PropSet();
-            //propSet3.Add(new LineProps(Color.Black));
-            //objs.Add(new Line(new Frame(315, 50, 365, 200), propSet3));
-
-            //PropSet propSet4 = new PropSet();
-            //propSet4.Add(new FillProps(Color.Yellow));
-            //objs.Add(new Rect(new Frame(300, 220, 365, 250), propSet4));
-
-            //Group group = new Group(objs);
-
-            //DrawSystem painter = new DrawSystem(graphics);
-            //group.Draw(painter);
-            #endregion
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            //MouseEventArgs cursor = (MouseEventArgs)e;
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
-        // Цвет заливки
-        private void button4_Click(object sender, EventArgs e)
-        {
-            controller.Model.ItemProperties.lineProperties.Color = GetColor();
-            controller.Model.ItemProperties.ApplyProperties();
-        }
-        // Цвет линии
-        private void button7_Click(object sender, EventArgs e)
-        {
-            controller.Model.ItemProperties.fillProperties.Color = GetColor();
-            controller.Model.ItemProperties.ApplyProperties();
-        }
-        // + ширина линии
-        private void button9_Click(object sender, EventArgs e)
-        {
-            controller.Model.ItemProperties.lineProperties.Width += 1;
-            controller.Model.ItemProperties.ApplyProperties();
-        }
-        // - ширина линии
-        private void button8_Click(object sender, EventArgs e)
+        private void MinusLineWidth(object sender, EventArgs e)
         {
             if (controller.Model.ItemProperties.lineProperties.Width > 1)
             {
                 controller.Model.ItemProperties.lineProperties.Width -= 1;
                 controller.Model.ItemProperties.ApplyProperties();
             }
-
+        }
+        private void PlusLineWidth(object sender, EventArgs e)
+        {
+            controller.Model.ItemProperties.lineProperties.Width += 1;
+            controller.Model.ItemProperties.ApplyProperties();
+        }
+        private void SetFillColor(object sender, EventArgs e)
+        {
+            controller.Model.ItemProperties.fillProperties.Color = GetColor();
+            controller.Model.ItemProperties.ApplyProperties();
+        }
+        private void SetLineColor(object sender, EventArgs e)
+        {
+            controller.Model.ItemProperties.lineProperties.Color = GetColor();
+            controller.Model.ItemProperties.ApplyProperties();
+        }
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Escape:
+                    controller.EventHandler.Escape();
+                    break;
+                case Keys.Delete:
+                    controller.EventHandler.Delite();
+                    break;
+            }
+        }
+        private void Form1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Escape:
+                    controller.EventHandler.Escape();
+                    break;
+                case Keys.Delete:
+                    controller.EventHandler.Delite();
+                    break;
+            }
         }
 
-        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        private void GroupButt_Click(object sender, EventArgs e)
         {
-            controller.EventHandler.LeftMouseDown(e.X, e.Y);
-        }
-
-        private void panel1_MouseUp(object sender, MouseEventArgs e)
-        {
-            controller.EventHandler.LeftMouseUp(e.X, e.Y);
-        }
-
-        private void panel1_MouseMove(object sender, MouseEventArgs e)
-        {
-            controller.EventHandler.MouseMove(e.X, e.Y);
+            controller.EventHandler.Group();
         }
     }
 }

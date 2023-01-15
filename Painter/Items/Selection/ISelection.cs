@@ -11,8 +11,8 @@ namespace Painter
         bool TryGrab(int x, int y);
         bool TryDrag(int x, int y);
         bool TrySelect(int x, int y);
-        bool TryGroup(int x, int y);
-        bool TryUnGroup(int x, int y);
+        bool TryGroup();
+        bool TryUnGroup();
         void Release();
         void SkipAll();
         void Repaint(DrawSystem drawSystem);

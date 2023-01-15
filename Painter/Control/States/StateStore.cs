@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Painter.Control.States;
+using System.Collections.Generic;
 
 namespace Painter
 {
@@ -8,7 +9,6 @@ namespace Painter
         {
             get
             {
-                //State retState;
                 foreach (State state in this)
                 {
                     if (state.StateType == stateType)
@@ -17,17 +17,15 @@ namespace Painter
                     }
                 }
                 return null;
-                //return retState;
             }
         }
         public StateStore(IModel model, IEventHandler eventHandler)
         {
             Add(new CreateState(model, eventHandler));
             Add(new GrabState(model, eventHandler));
+            Add(new SingleSelection(model, eventHandler));
+            Add(new EmptyState(model, eventHandler));
+            Add(new MultiSelection(model, eventHandler));
         }
-        //public State ActiveState()
-        //{
-        //    return 
-        //}
     }
 }

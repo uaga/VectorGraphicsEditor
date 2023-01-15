@@ -29,9 +29,6 @@ namespace Painter
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button5 = new System.Windows.Forms.Button();
@@ -40,40 +37,9 @@ namespace Painter
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.GroupButt = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(1240, 11);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(125, 50);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(1240, 65);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(125, 50);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(1240, 119);
-            this.button3.Margin = new System.Windows.Forms.Padding(2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(125, 50);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -85,7 +51,7 @@ namespace Painter
             this.button4.TabIndex = 3;
             this.button4.Text = "Line color";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.Click += new System.EventHandler(this.SetLineColor);
             // 
             // panel1
             // 
@@ -95,7 +61,6 @@ namespace Painter
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1208, 1146);
             this.panel1.TabIndex = 4;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
@@ -103,24 +68,24 @@ namespace Painter
             // button5
             // 
             this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.Location = new System.Drawing.Point(1240, 407);
+            this.button5.Location = new System.Drawing.Point(1240, 12);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(125, 50);
             this.button5.TabIndex = 5;
             this.button5.Text = "Line";
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button1_Click);
+            this.button5.Click += new System.EventHandler(this.SetLineType);
             // 
             // button6
             // 
             this.button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button6.Location = new System.Drawing.Point(1240, 463);
+            this.button6.Location = new System.Drawing.Point(1240, 68);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(125, 50);
             this.button6.TabIndex = 6;
             this.button6.Text = "Rect";
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button2_Click);
+            this.button6.Click += new System.EventHandler(this.SetRectType);
             // 
             // button7
             // 
@@ -132,7 +97,7 @@ namespace Painter
             this.button7.TabIndex = 7;
             this.button7.Text = "Fill color";
             this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.button7.Click += new System.EventHandler(this.SetFillColor);
             // 
             // button8
             // 
@@ -142,7 +107,7 @@ namespace Painter
             this.button8.TabIndex = 8;
             this.button8.Text = "-";
             this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.button8.Click += new System.EventHandler(this.MinusLineWidth);
             // 
             // button9
             // 
@@ -152,7 +117,7 @@ namespace Painter
             this.button9.TabIndex = 9;
             this.button9.Text = "+";
             this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
+            this.button9.Click += new System.EventHandler(this.PlusLineWidth);
             // 
             // label1
             // 
@@ -164,11 +129,32 @@ namespace Painter
             this.label1.Text = "Размер линии";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // GroupButt
+            // 
+            this.GroupButt.Location = new System.Drawing.Point(1240, 451);
+            this.GroupButt.Name = "GroupButt";
+            this.GroupButt.Size = new System.Drawing.Size(125, 50);
+            this.GroupButt.TabIndex = 11;
+            this.GroupButt.Text = "Group";
+            this.GroupButt.UseVisualStyleBackColor = true;
+            this.GroupButt.Click += new System.EventHandler(this.GroupButt_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1240, 507);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(125, 50);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "UnGroup";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1388, 1168);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.GroupButt);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
@@ -177,24 +163,19 @@ namespace Painter
             this.Controls.Add(this.button5);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form1";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button5;
@@ -203,6 +184,8 @@ namespace Painter
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button GroupButt;
+        private System.Windows.Forms.Button button1;
     }
 }
 

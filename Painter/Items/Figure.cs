@@ -41,7 +41,7 @@ namespace Painter
             {
                 return true;
             }
-            return false;
+            return TryGrabFromFrame(x, y);
         }
     }
     class Rect : Figure
@@ -53,12 +53,16 @@ namespace Painter
 
         public override Selection CreateSelection()
         {
-            throw new System.NotImplementedException();
+            return new RectSelection(this);
         }
 
         public override bool TryGrab(int x, int y)
         {
-            throw new System.NotImplementedException();
+            if (x > frame.x1 & x < frame.x2 & y > frame.y1 & y < frame.y2)
+            {
+                return true;
+            }
+            return false;
         }
 
         protected override void Drowgeometry(DrawSystem painter)

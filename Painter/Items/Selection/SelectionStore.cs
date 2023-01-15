@@ -12,6 +12,11 @@ namespace Painter
         public void Release()
         {
             ActiveSelection= null;
+        }
+
+        internal void SkipAll()
+        {
+            ActiveSelection = null;
             Clear();
         }
     }
