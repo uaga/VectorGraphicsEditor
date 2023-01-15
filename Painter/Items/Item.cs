@@ -11,7 +11,11 @@
         abstract public void Draw(DrawSystem painter);
         public void SetRelativeFrame(Frame parentFrame)
         {
-            RelativeFrame = new RelativeFrame((frame.x1 - parentFrame.x1) / (parentFrame.lenght * 1.0), (frame.y1 - parentFrame.y1) / (parentFrame.width * 1.0), (frame.x2 - frame.x1) / (parentFrame.lenght * 1.0), (frame.y2 - frame.y1) / (parentFrame.width * 1.0));
+            double x1 = (frame.x1 - parentFrame.x1) / (parentFrame.lenght * 1.0);
+            double y1 = (frame.y1 - parentFrame.y1) / (parentFrame.width * 1.0);
+            double lenght = (frame.x2 - frame.x1) / (parentFrame.lenght * 1.0);
+            double width = (frame.y2 - frame.y1) / (parentFrame.width * 1.0);
+            RelativeFrame = new RelativeFrame(x1, y1, lenght, width);
         }
         public void UpdateFrameWithRelativeFrame(Frame parentFrame)
         {
